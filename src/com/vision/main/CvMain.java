@@ -14,5 +14,6 @@ public class CvMain {
 		System.out.println("mat = " + mat.dump());
 		
 		new ModifyImage().modifyImageTest("test01.jpg");
+		new ModifyImage().modifyImageTest("test01.png");
 	}
 }
