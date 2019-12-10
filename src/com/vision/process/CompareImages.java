@@ -166,7 +166,7 @@ public class CompareImages {
 		return retVal;
 	}
 	
-	public int compareHistogram(String filename1, String filename2) {
+	public CompareResult compareHistogram(String filename1, String filename2) {
 		int retVal = 0;
 		
 		long startTime = System.currentTimeMillis();
@@ -223,6 +223,12 @@ public class CompareImages {
 		System.out.println("Method [2] " + result2);
 		System.out.println("Method [3] " + result3);
 		
+		CompareResult compareResult = new CompareResult();
+		compareResult.setCorelation(result0);
+		compareResult.setChiSquare(result1);
+		compareResult.setIntersection(result2);
+		compareResult.setBhattaccharyya(result3);
+		
 		//If the count that it is satisfied with the condition is over 3, two images is same.
 		int count=0;
 		if(result0 > 0.9) count++;
@@ -230,11 +236,11 @@ public class CompareImages {
 		if(result2 > 1.5) count++;
 		if(result3 > 0.3) count++;
 		
-		if (count >=3) retVal = 1;
+		if (count >=3) compareResult.setAccurate(true);
 		
 		long estimatedTime = System.currentTimeMillis() - startTime;
 		System.out.println("estimatedTime=" + estimatedTime + "ms");
 		
-		return retVal;
+		return compareResult;
 	}
 }
